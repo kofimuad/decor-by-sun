@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap');
+
+:root {
+  --green:       #1B4332;
+  --green-mid:   #2D6A4F;
+  --green-light: #52796F;
+  --green-dark:  #0f2a1f;
+  --gold:        #C9A84C;
+  --gold-light:  #E2C97E;
+  --cream:       #F5F0E8;
+  --cream-dark:  #EDE6D6;
+  --glass-bg:         rgba(255,255,255,0.08);
+  --glass-border:     rgba(255,255,255,0.18);
+  --glass-bg-cream:   rgba(245,240,232,0.6);
+  --glass-border-cream: rgba(27,67,50,0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--green);
+  overflow-x: hidden;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes heroZoom {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.12); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── GLASS UTILITY ── */
+.glass-dark {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-light {
+  background: var(--glass-bg-cream);
+  border: 1px solid var(--glass-border-cream);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── TYPOGRAPHY UTILITIES ── */
+.font-serif { font-family: 'Cormorant Garamond', serif; }
+
+.section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.9rem;
+  font-family: 'Jost', sans-serif;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+/* ── MOBILE RESPONSIVENESS ── */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  nav { padding: 1rem 1.2rem !important; }
+
+  /* Hero glass card */
+  section > div[style*="backdropFilter"] {
+    padding: 2rem 1.5rem !important;
+    width: 92% !important;
+  }
+
+  /* Sections padding */
+  section { padding: 4rem 1.5rem !important; }
+
+  /* Two-column grids → single column */
+  .booking-wrap,
+  div[style*="gridTemplateColumns: '1fr 1fr'"],
+  div[style*="gridTemplateColumns: \"1fr 1fr\""] {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Footer grid */
+  footer > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+  footer { padding: 3.5rem 1.5rem 2rem !important; }
+
+  /* About page two-col */
+  div[style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Services grid — 1 column on mobile */
+  div[style*="minmax(230px, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Portfolio grid */
+  div[style*="minmax(300px, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Booking form name+phone grid */
+  div[style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Asymmetric portfolio grid → simple 1col */
+  div[style*="gridTemplateColumns: 'repeat(12, 1fr)'"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  div[style*="gridColumn: 'span 5'"],
+  div[style*="gridColumn: 'span 4'"],
+  div[style*="gridColumn: 'span 3'"] {
+    grid-column: span 1 !important;
+  }
+
+  /* Stats cards — 2x2 on mobile */
+  div[style*="gridTemplateColumns: 'repeat(4, 1fr)'"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Hero h1 */
+  h1 { font-size: clamp(1.9rem, 8vw, 3rem) !important; }
+
+  /* Services alt layout */
+  div[style*="direction: 'rtl'"] { direction: ltr !important; }
+}
+
+@media (max-width: 480px) {
+  /* Very small phones */
+  section { padding: 3rem 1.2rem !important; }
+  footer { padding: 3rem 1.2rem 1.5rem !important; }
+
+  div[style*="gridTemplateColumns: 'repeat(4, 1fr)'"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Portfolio 1 col on very small screens */
+  div[style*="minmax(300px, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── ADMIN RESPONSIVE ── */
+@media (max-width: 768px) {
+  /* Push main content below the fixed mobile top bar */
+  .admin-sidebar-desktop { display: none !important; }
+  .admin-topbar          { display: flex !important; }
+
+  /* All admin <main> elements get top padding for the topbar */
+  div[style*="background: #f7f6f3"] > main,
+  div[style*="background:#f7f6f3"] > main {
+    padding: 5rem 1.2rem 2rem !important;
+  }
+
+  /* Admin tables — scroll horizontally */
+  table { min-width: 100% !important; }
+  div[style*="overflow: auto"] { overflow-x: auto !important; }
+
+  /* Admin grids — 2 col → 1 col */
+  div[style*="gridTemplateColumns: '1fr 1fr'"],
+  div[style*="gridTemplateColumns: \"1fr 1fr\""],
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stats cards — 2×2 on mobile */
+  div[style*="gridTemplateColumns: 'repeat(4, 1fr)'"],
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Booking detail two-col */
+  div[style*="gridTemplateColumns: '1fr 320px'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Settings cards max-width */
+  div[style*="maxWidth: '800px'"] {
+    max-width: 100% !important;
+  }
+
+  /* Admin form inputs full width */
+  input[type="url"], input[type="text"], input[type="date"], select, textarea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Portfolio grid */
+  div[style*="minmax(200px, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  div[style*="minmax(200px, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="gridTemplateColumns: 'repeat(4, 1fr)'"],
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
